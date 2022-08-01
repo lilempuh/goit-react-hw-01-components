@@ -1,20 +1,28 @@
-
+import { StatisticsList } from "components/Statistics/StatisticsList";
+import PropTypes from 'prop-types';
+import {Section} from '../Section/Section.styled'
+import {SectionTitle,SectionList,} from './Statistics.styled'
 
 export const Statistics = ({ title, stats }) => {
     return (
-        <section className="statistics">
-            <h2 className="title">{title}</h2>
-            
-            <ul className="stat-list">
-                {stats.map(stat => (
-                    <li key={stat.id}>
-                        <StatisticsList 
-                        />
-                    </li>))} </ul>
-        </section>
+        <Section>
+            {title.length > 0 && (<SectionTitle>{title}</SectionTitle>)}
+                        
+            <SectionList>
+                {stats.map(({id, label,percentage}) => (
+                <StatisticsList   key={id} label={label} percentage={percentage} />
+                    ))}
+            </SectionList>
+        </Section>
     )
 };
 
 Statistics.propTypes = {
     title: PropTypes.string.isRequired,
-    key:PropTypes.string.isRequired,
+    stats: PropTypes.arrayOf(
+        PropTypes.exact({
+            id: PropTypes.string.isRequired,
+            label:PropTypes.string.isRequired,
+      percentage: PropTypes.number.isRequired
+  }),)
+}
