@@ -6,7 +6,7 @@ import {SectionTitle,SectionList,} from './Statistics.styled'
 export const Statistics = ({ title, stats }) => {
     return (
         <Section>
-            {title.length > 0 && (<SectionTitle>{title}</SectionTitle>)}
+            {title && (<SectionTitle>{title}</SectionTitle>)}
                         
             <SectionList>
                 {stats.map(({id, label,percentage}) => (
